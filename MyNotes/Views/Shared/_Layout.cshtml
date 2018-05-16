@@ -8,16 +8,32 @@
 <body>
 
     <!--меню-->
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse navbar">
         <div class="container">
             <div>
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
-                    <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-                    @*<li><a href="~/home/index">Home2</a></li>*@
+
+                    @*<li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>*@
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        
+                        <form method="post" asp-controller="Account" asp-action="LogOff">
+                            <input type="submit" value="Exit" class="nav navbar-btn btn-link" />
+                        </form>
+                        <li class="nav navbar-text navbar-right">Hello, @User.Identity.Name!</li>
+
+
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
+                    }
                 </ul>
-                <p class="nav navbar-text navbar-right">Hello, @User.Identity.Name!</p>
+                
             </div>
         </div>
     </nav>
