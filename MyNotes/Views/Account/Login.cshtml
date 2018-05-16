@@ -1,0 +1,10 @@
+﻿@model MyNotes.ViewModels.LoginViewModel
+@{
+
+    ViewData["Title"] = "Login page";
+}
+
+<form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.returnUrl">
+
+</form>
+

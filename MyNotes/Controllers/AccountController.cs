@@ -66,6 +66,67 @@ namespace MyNotes.Controllers
             }
             return View(model);
         }
+
+
+        // https://metanit.com/sharp/aspnet5/16.4.php
+        [HttpGet]
+        public IActionResult Login(string returnUrl=null)
+        {
+            // В Get-версии метода Login мы получаем адрес для возврата в виде параметра returnUrl и передаем его в модель LoginViewModel.
+            return View(new LoginViewModel { ReturnUrl = returnUrl });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            /*
+            В Post-версии метода Login получаем данные из представления в виде модели LoginViewModel. 
+            Всю работу по аутентификации пользователя выполняет метод signInManager.PasswordSignInAsync(). 
+            Этот метод принимает логин и пароль пользователя. Третий параметр метода указывает, 
+            надо ли сохранять устанавливаемые куки на долгое время.*/
+            if (ModelState.IsValid)
+            {
+                var result =
+                    await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                if (result.Succeeded)
+                {
+                    //checking URL is belong to app
+                    if(!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    {
+                        return Redirect(model.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Incorrect password or Login");
+                }
+                
+            }
+            return View(model);
+            /*
+            Данный метод также возвращает IdentityResult, с помощью которого можно узнать, 
+            завершилась ли аутентификация успешно. Если она завершилось успешно, то используем свойство ReturnUrl модели LoginViewModel 
+            для возврата пользователя на предыдущее место. Для этого нужно еще удостовериться, что адрес возврата принадлежит приложению 
+            с помощью метода Url.IsLocalUrl(). Это позволит избежать перенаправлений на нежелательные сайты. 
+            Если же адрес возврата не установлен или не принадлежит приложению, выполняем переадресацию на главную страницу.*/
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogOff()
+        {
+            /*
+            Третий метод - метод LogOff выполняет выход пользователя из приложения. За выход отвечает метод _signInManager.SignOutAsync(), 
+            который очищает аутентификационные куки.*/
+            // delete auth cookies
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
  
