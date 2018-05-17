@@ -10,10 +10,10 @@ namespace MyNotes.ViewModels
         [Display(Name ="Email")]
         public string Email { get; set; }
 
-        //[Required]
-        //[Display(Name = "Year of birth")]
-        //public int
-        // nafig ne nado at this time ☺
+        [Required]
+        [Display(Name = "Your Name")]
+        public string UserName { get; set; }
+        
 
         [Required]
         [DataType(DataType.Password)]

@@ -19,7 +19,8 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        
+                        <li><a asp-area="" asp-controller="Users" asp-action="Index">Users</a></li>
+
                         <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" class="navbar-right">
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
@@ -29,9 +30,9 @@
                                     <a asp-area="">Hi, @User.Identity.Name!</a>
                                 </li>
                             </ul>
-                            
+
                         </form>
-                        
+
 
 
                     }
