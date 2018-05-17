@@ -20,10 +20,18 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         
-                        <form method="post" asp-controller="Account" asp-action="LogOff">
-                            <input type="submit" value="Exit" class="nav navbar-btn btn-link" />
+                        <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" class="navbar-right">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <button type="submit" value="Exit" class="btn navbar-btn btn-link navbar-link">Logout</button>
+                                </li>
+                                <li>
+                                    <a asp-area="">Hi, @User.Identity.Name!</a>
+                                </li>
+                            </ul>
+                            
                         </form>
-                        <li class="nav navbar-text navbar-right">Hello, @User.Identity.Name!</li>
+                        
 
 
                     }
