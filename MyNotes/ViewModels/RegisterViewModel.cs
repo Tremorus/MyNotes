@@ -10,7 +10,7 @@ namespace MyNotes.ViewModels
         [Display(Name ="Email")]
         public string Email { get; set; }
 
-        [Required]
+        
         [Display(Name = "Your Name")]
         public string UserName { get; set; }
         
