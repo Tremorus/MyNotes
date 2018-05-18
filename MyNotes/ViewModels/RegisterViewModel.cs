@@ -11,8 +11,8 @@ namespace MyNotes.ViewModels
         public string Email { get; set; }
 
         
-        [Display(Name = "Your Name")]
-        public string UserName { get; set; }
+        //[Display(Name = "Your Name")]
+        //public string UserName { get; set; }
         
 
         [Required]
