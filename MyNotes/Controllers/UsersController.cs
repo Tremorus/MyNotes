@@ -48,7 +48,7 @@ namespace MyNotes.Controllers
             if (user == null)
             {
                 return NotFound();
-            }
+            }  
             EditUserViewModel model = new EditUserViewModel { Id = user.Id, Email = user.Email };
             return View(model);
         }
