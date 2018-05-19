@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using MyNotes.Models;
 using MyNotes.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyNotes.Controllers
 {
+    //[Authorize(Roles ="admin")]
     public class UsersController : Controller
     {
         UserManager<User> _userManager;

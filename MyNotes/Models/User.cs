@@ -6,8 +6,6 @@ namespace MyNotes.Models
     {
         public string Name { get; set; }
         public string Login { get; set; }
-        
-
 
     }
 }

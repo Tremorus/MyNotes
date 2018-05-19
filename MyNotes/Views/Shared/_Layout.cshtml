@@ -20,6 +20,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li><a asp-area="" asp-controller="Users" asp-action="Index">Users</a></li>
+                        <li><a asp-area="" asp-controller="Roles" asp-action="Index">Roles</a></li>
 
                         <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" class="navbar-right">
                             <ul class="nav navbar-nav navbar-right">
